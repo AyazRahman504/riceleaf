@@ -17,6 +17,15 @@ model_paths = {
 yolov8_folder = 'yolov8'
 yolov10_folder = 'yolov10'
 yolov11_folder = 'yolov11'
+yolov80_folder = 'yolov80'
+yolov100_folder = 'yolov100'
+yolov110_folder = 'yolov110'
+def load_images_from_folder(folder):
+    image_files = []
+    for filename in os.listdir(folder):
+        if filename.endswith(('.svg', '.png', '.jpg')):
+            image_files.append(os.path.join(folder, filename))
+    return image_files
 def display_disease_info():
     st.title("🌾 Rice Leaf Disease Information")
     
@@ -77,7 +86,7 @@ def predict_and_save(model, img, model_folder):
 
 # Streamlit app
 st.sidebar.title("🌟 Navigation")
-page = st.sidebar.radio("Choose a page", ["Home","Disease Information", "Model Comparison","Image Gallery","Results by Model","Contact Us"])
+page = st.sidebar.radio("Choose a page", ["Home","Disease Information", "Model Comparison","Image Gallery","Model Analytics","Results by Model","Contact Us"])
 
 if page == "Home":
     st.title("🌾 Multi-Image Rice Leaf Disease Detection")
@@ -125,7 +134,7 @@ elif page == "Model Analytics":
         
         # Display images for YOLOv8
         st.markdown("#### Visual Results from YOLOv8")
-        yolo_v8_images = load_images_from_folder(yolov8_folder)  # Get images from YOLOv8 folder
+        yolo_v8_images = load_images_from_folder(yolov80_folder)  # Get images from YOLOv8 folder
         cols = st.columns(5)  # Display in rows (5 columns each)
         for i, image in enumerate(yolo_v8_images):
             image_name = os.path.basename(image)  # Extract the filename from the full path
@@ -153,7 +162,7 @@ elif page == "Model Analytics":
         
         # Display images for YOLOv10
         st.markdown("#### Visual Results from YOLOv10")
-        yolo_v10_images = load_images_from_folder(yolov10_folder)  # Get images from YOLOv10 folder
+        yolo_v10_images = load_images_from_folder(yolov100_folder)  # Get images from YOLOv10 folder
         cols = st.columns(5)  # Display in rows (5 columns each)
         for i, image in enumerate(yolo_v10_images):
             image_name = os.path.basename(image)  # Extract the filename from the full path
@@ -181,7 +190,7 @@ elif page == "Model Analytics":
         
         # Display images for YOLOv11
         st.markdown("#### Visual Results from YOLOv11")
-        yolo_v11_images = load_images_from_folder(yolov11_folder)  # Get images from YOLOv11 folder
+        yolo_v11_images = load_images_from_folder(yolov110_folder)  # Get images from YOLOv11 folder
         cols = st.columns(5)  # Display in rows (5 columns each)
         for i, image in enumerate(yolo_v11_images):
             image_name = os.path.basename(image)  # Extract the filename from the full path
